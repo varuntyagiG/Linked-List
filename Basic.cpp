@@ -11,6 +11,10 @@ class Node{
               this->data = data;
               this->next = NULL;
        }
+
+       ~Node(){
+              cout << "Deleted " << this->data << endl;
+       }
 };
 
 int linkedListLength(Node* Head){
@@ -83,6 +87,51 @@ void insertAtPostition(Node* &Head,Node* Tail,int pos,int data){
        prev->next = newNode;
 }
 
+void deleteNode(Node* &Head,Node* &Tail,int pos){
+       if(pos == 1){
+              Node* temp = Head;
+              Head = Head->next;
+              temp->next = nullptr;
+              delete temp;
+              return;
+       }
+
+       int len = linkedListLength(Head);
+
+       if(pos == len){
+              Node* prev = Head;
+              int i = 1;
+              while(i < (pos - 1)){
+                     prev = prev->next;
+                     i++;
+              }
+              Node* temp = Tail;
+              Tail = prev;
+              prev->next = nullptr;
+              delete temp;
+              return;
+       }
+
+       // at any position
+       int j = 1;
+       Node* previos = Head;
+       while(j < (pos - 1)){
+              previos = previos->next;
+              j++;
+       }
+       
+       Node* currNext = previos->next->next;
+
+       Node* temmp = previos->next;
+
+       previos->next = currNext;
+
+       temmp->next = nullptr;
+
+       delete temmp;
+
+}
+
 int main(){
        Node* Head = NULL;
        Node* Tail = NULL;
@@ -100,9 +149,14 @@ int main(){
        insertAtTail(Head,Tail,80);
        insertAtTail(Head,Tail,90);
        insertAtTail(Head,Tail,100);
+       print(Head);     
+       cout << endl;
 
        // insert At any Position
-       insertAtPostition(Head,Tail,50,999);
+       // insertAtPostition(Head,Tail,50,999);
+
+       deleteNode(Head,Tail,2);
+
 
        print(Head);       
        return 0;
