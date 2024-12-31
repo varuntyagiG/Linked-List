@@ -13,6 +13,16 @@ class Node{
        }
 };
 
+int linkedListLength(Node* Head){
+       Node* temp = Head;
+       int l = 0;
+       while(temp != nullptr){
+              temp = temp->next;
+              l += 1;
+       }
+       return l;
+}
+
 void insertAtTail(Node* &Head,Node* &Tail,int data){
        Node* newNode = new Node(data);
 
@@ -45,6 +55,17 @@ void print(Node* Head){
 }
 
 void insertAtPostition(Node* &Head,Node* Tail,int pos,int data){
+       if(pos == 0){
+              insertAtHead(Head,Tail,data);
+              return;
+       }
+
+       int len = linkedListLength(Head);
+       if(pos == len){
+              insertAtTail(Head,Tail,data);
+              return;
+       }
+
        int i = 1;
        // 1-step
        Node* prev = Head;
@@ -81,7 +102,7 @@ int main(){
        insertAtTail(Head,Tail,100);
 
        // insert At any Position
-       insertAtPostition(Head,Tail,4,45);
+       insertAtPostition(Head,Tail,10,45);
 
        print(Head);       
        return 0;
