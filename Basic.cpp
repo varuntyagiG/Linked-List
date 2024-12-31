@@ -61,7 +61,7 @@ void insertAtPostition(Node* &Head,Node* Tail,int pos,int data){
        }
 
        int len = linkedListLength(Head);
-       if(pos == len){
+       if(pos >= len){
               insertAtTail(Head,Tail,data);
               return;
        }
@@ -102,7 +102,7 @@ int main(){
        insertAtTail(Head,Tail,100);
 
        // insert At any Position
-       insertAtPostition(Head,Tail,10,45);
+       insertAtPostition(Head,Tail,50,999);
 
        print(Head);       
        return 0;
